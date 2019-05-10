@@ -1,0 +1,23 @@
+git 命令
+
+git init
+git add -A
+git diff
+git commit -m "XXX"
+git commit -am "XXXXX"
+
+git log
+git log --pretty=oneline
+
+get reflong //查看每一次命令记录
+git reset --hard HEAD //当前版本 HEAD 上一个版本HEAD^ 往上100个版本 HEAD~100
+
+git clone  https://github.com/PengChen123/Learn.git
+
+git checkout -- file  //丢弃工作区修改
+
+git branch   //查看分支
+git branch  name  //创建分支
+git checkout name  //切换分支
+
+git remote add '短名称' http://....
