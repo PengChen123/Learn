@@ -1,0 +1,118 @@
+class Person {
+        public string personName;
+        public int personAge;
+
+        public Person(string name, int age) {
+            personName = name;
+            personAge = age;
+        }
+        public Person() { }
+
+        public Person(int age):this("", age) {
+        }
+
+        public Person(string name) : this(name, 0) {
+        }
+
+        public void Display() {
+            Console.WriteLine("name:{0}  age:{1}",personName,personAge);
+        }
+    }
+this 串联构造函数
+
+代码段
+ctor构造函数
+属性
+prop
+propfull
+
+集合接口类型 分非泛型和泛型
+IEnumerator	IEnumerator<T>
+IEnumerable IEnumerable<T>
+ICollection	ICollection<T>
+IDictionary	IDictionary<K,V>
+IList		IList<T>
+IEnumerator  e = IEnumberable.GetIEnumerator()
+			e 提供movenext() current  reset()
+
+
+Array->ArrayList->List<T>
+Array连续长度固定，插入删除需要移动大量数据
+ArrayList存入Objct类型 值不一定相同需要转拆箱
+List泛型 存入类型相同
+
+collection sound code;
+	stack 默认长度10,new 可以指定长度。在push时如果当前长度已满，则长度会变为当前length*2
+	queue 默认长度32，Enqueue满的时候,会将length*2( 判断值是否 < length+4,如果小于则新长度是length+4 )
+	list  默认长度4，add满的时候length*2
+		Predicate委托的三种方式
+			Find(_list, GetString);
+            Find(_list, x=>x.Length>3);
+            Find(_list, delegate(string x){ return x.Length > 3; });
+        TrimExcess()将容量尝试设置为list实际的数量
+        TrueForAll(Predicate)判断list所有元素是否符合predicate条件
+
+        indexof binarysearch区别  indexof是线性搜索   binarysearch二分查（性能分界length>120）
+
+    泛型集合比较用IEqualityCompare<T> 比 Equals性能好，Equals要装拆箱，符合类型类型转换频繁
+
+    TryGetValue根据key，out Value  |true 返回找到的value false返回value类型默认值(default(T))
+
+    ArrayList默认长度4 add满的时候length*2
+
+关联性泛型集合类（键值对）
+    Dictionary<TKey,TValue>
+    	所有集合查询最快内部使用散列函数+双数组 O(1),是一种牺牲空间换时间的做法
+    sortedDictionary<TKey,TValue>
+    	有序，key唯一。O(log n)快速查询的同时支持排序 使用的平衡搜索二叉树（红黑树）添加删除频繁使用
+    	内部用继承了SortedSet的TreeSet存储KeyValuePair
+    sortedList<TKey,TValue> 
+    	默认长度16 满了length*2
+    	快查有需要排序  添加删除O(n) 查找利用2分查找O(log n) 牺牲查找效率
+    	适用快查排序 添加删除少的场景
+
+    PS:SortedList<TKey,TValue>和SortedDictionary<TKey,TValue>
+    	相同：都支持快查排序
+    	区别：
+    		sortedDiceionary添加删除快
+    		SortedList占用少
+    		未排序情况下shortedDic插入删除O(log n)
+    					shoredList 为O(n)
+非关联性泛型集合类
+	List 读多写少 扩容设计到对象创建赋值，最好能定义合适的初始长度
+	LinkedList 写多读少 内部实现是双向链表
+		实际存放的都是LinkedListNode类型的节点
+		节点保存了
+		next	下一个节点
+ 		prev	上一个节点
+		List 	当前linkedlist
+		value 	当前节点值
+	HashSet 	无序排重的，不支持下标访问
+	SoredSet 	排序排重
+	stack 后进先出
+	queue 先进先出
+
+线程安全集合
+	ConcurrentQueue，Concurrentstack，ConcurrentBag，ConcurrentDictionary
+
+Array.BinarySeach(array,value)搜索返回结果
+1.value在array中，返回值的索引（从0开始）
+2.value不在array中:
+	1)在array范围中 返回插入点的索引值（从1开始）
+	2)大于 -(length+1)
+	3)小于 -1
+
+
+堆栈  托管堆
+	结构体 尽量避免当做参数传入，会在栈中重复占用内存  需用 (ref struct)形式 通过引用来传入。但是函数内修改结构体值 函数外也会相应更改
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,493 @@
+Eventsystem支持大量的事件，并且他们可以进一步定制在用户自定义的用户编写的 InputModules中。
+支持的StandaloneInputModule和 TouchInputModule的事件提供的接口和所实现的接口可以在 MonoBehaviour中实现。如果你有有效的 EventSystem配置的事件会在正确的时间被调用。
+•IPointerEnterHandler-OnPointerEnter- 		当pointer指针进入该对象时调用
+•IPointerExitHandler-OnPointerExit-   		当pointer指针退出该对象时调用
+•IPointerDownHandler-OnPointerDown-			当指针在对象上按下时调用
+•IPointerUpHandler-OnPointerUp-				pointer指针被释放（原状态为被按下）时调用
+•IPointerClickHandler-OnPointerClick-		pointer指针在同一对象上按下并释放时调用（单击）
+•IBeginDragHandler-OnBeginDrag-				拖动对象在拖动开始时调用
+•IDragHandler-OnDrag-						拖动对象，当拖动正在发生进行时调用
+•IEndDragHandler-OnEndDrag-					拖动对象拖动完成时调用
+•IDropHandler-OnDrop-						对该对象拖动完成时调用
+•IScrollHandler-OnScroll-					当鼠标滚轮滚动时调用
+•IUpdateSelectedHandler-OnUpdateSelected-	在选定的对象上eachtick中调用
+•ISelectHandler-OnSelect-					当对象成为所选的对象时调用
+•IDeselectHandler-OnDeselect-				在被选定的对象成为取消被选择时调用
+•IMoveHandler-OnMove-						移动事件发生时调用（左、右、上、 下等）
+•ISubmitHandler-OnSubmit-					当按下提交按钮时调用
+•ICancelHandler-OnCancel-					当按下取消按钮时调用
+
+
+EventSystem需要一种方法用于检测当前的输入的事件需要发送到什么上，而这由 Raycasters提供的。Raycasters搜索scene返回给定的屏幕的位置上‘most valid’（最有效的）的对象。有几种类型的 Raycasters被提供：
+
+•GraphicRaycaster-用于 UI 元素，在画布上，画布内搜索
+•Physics2DRaycaster-用于为 2D 物理元素
+•PhysicsRaycaster-用于为三维物理元素
+
+当一个场景中存在并且启用了Raycaster时，它将被用于EventSystem随时查询InputModule是谁发出的。
+==================================================================================================================================================================
+1, World Space（世界坐标）：
+
+我们在场景中添加物体（如：Cube），他们都是以世界坐标显示在场景中的。transform.position可以获得该位置坐标。
+
+2, Screen Space（屏幕坐标）:
+
+以像素来定义的，以屏幕的左下角为（0，0）点，右上角为（Screen.width，Screen.height），Z的位置是以相机的世界单位来衡量的。
+
+注：鼠标位置坐标属于屏幕坐标，Input.mousePosition可以获得该位置坐标，手指触摸屏幕也为屏幕坐标，Input.GetTouch(0).position可以获得单个手指触摸屏幕坐标。
+
+3.ViewPort Space（视口坐标）:
+
+视口坐标是标准的和相对于相机的。相机的左下角为（0，0）点，右上角为（1，1）点，Z的位置是以相机的世界单位来衡量的。
+
+4, 绘制GUI界面的坐标系：
+
+这个坐标系与屏幕坐标系相似，不同的是该坐标系以屏幕的左上角为（0，0）点，右下角为（Screen.width，Screen.height）。
+
+【四种坐标系的转换】
+
+1、世界坐标→屏幕坐标：camera.WorldToScreenPoint(transform.position);这样可以将世界坐标转换为屏幕坐标。其中camera为场景中的camera对象。
+
+2、屏幕坐标→视口坐标：camera.ScreenToViewportPoint(Input.GetTouch(0).position);这样可以将屏幕坐标转换为视口坐标。其中camera为场景中的camera对象。
+
+3、视口坐标→屏幕坐标：camera.ViewportToScreenPoint();
+
+4、视口坐标→世界坐标：camera.ViewportToWorldPoint();
+==================================================================================================================================================================
+两个坐标相同
+Debug.Log("localPosition" + Transform.localPosition);[Vector3]
+Debug.Log("anchoredPosition"+(Transform as RectTransform).anchoredPosition);
+
+
+==================================================================================================================================================================
+anchoredPosition
+中心点相对于四个锚点中点的坐标
+
+rect
+rect的x和y返回左下角相对于中心点的距离,w和h返回本身的宽高.
+
+offsetMin和offsetMax
+分别指左下角相对于左下角锚点的距离以及右上角相对于右上角锚点的距离
+
+anchorMin和anchorMax
+这个是针对锚点的,锚点时相对于父容器定义的,所以这两个属性也是相对于父容器的.分别指锚点占父容器尺寸的百分比位置.
+
+sizeDelta
+如果四个锚点都在一定,就是宽度和高度,如果水平的锚点分开了,y还是高度,x变成了-(left+right).如果垂直的锚点分开了,x还是宽度,y变成了-(top+bottom)
+==================================================================================================================================================================
+RectTransformUtility.FlipLayoutAxes 对角翻转
+RectTransformUtility.FlipLayoutOnAxis 水平，垂直翻转
+RectTransformUtility.ScreenPointToLocalPointInRectangle 已物体锚点为(0,0)  相当于物体的(Transform as RectTransform).anchoredPosition)[Vector2]
+RectTransformUtility.ScreenPointToWorldPointInRectangle 已左下角为(0,0)    相当于物体的Transform.Position[Vector3]
+
+==================================================================================================================================================================
+
+Inspector面板pos X pos Y 就是RectTransform.anchoredPosition
+
+transform as RectTransform  尽量不要用Getcommont<RectTransform>()
+
++=======================================+
+|				            |					          |
+|			        	  	Y				    	      |
+|				          	|					          |
+|           +===============+			      |
+|           |				        |			      |
+|--- X -----| rect(x,y,w,h)	H		       	|
+|     			|				        |			      |
+|			      +========W======+			      |
+|										                    |    
+|									                    	|
++=======================================+
+
+==================================================================================================================================================================
+Button  interactable是否禁止点击（变灰）
+==================================================================================================================================================================
+文本顶点         图片是左下到右上
+  1       2
+  +-------+
+ 6|\      |
+  | \	    |
+  |  \	  |
+  |   \	  |
+  |    \  |
+  |     \ |
+  |	     \|
+ 5+-------+3
+          4
+==================================================================================================================================================================
+Unity 下载图片
+	Transform panel;
+    Image image;
+    string url;
+    Texture2D headIMG;
+    void Start () {
+        transform.Find("Panel/Text").GetComponent<Text>().text = "1111";
+        panel = transform.Find("Panel");
+        image = panel.GetComponent<Image>();
+        url = "http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=3d2175db3cd3d539d530078052ee8325/b7003af33a87e950c1e1a6491a385343fbf2b425.jpg";
+    }
+
+    // Update is called once per frame
+    IEnumerator DownLoadImage()
+    {
+		//WWW的模式（老）
+        //WWW www = new WWW(url);
+        //yield return www;
+        //headIMG = www.texture;
+		
+		//UnityWebRequest的模式（新）
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+        yield return request.SendWebRequest();
+		
+		
+		两种获取Texture2D
+        //headIMG = ((DownloadHandlerTexture)request.downloadHandler).texture;
+        headIMG = DownloadHandlerTexture.GetContent(request);
+		
+        Sprite s_headIMG = Sprite.Create(headIMG, new Rect(0, 0, headIMG.width, headIMG.height), new Vector2(0.5f, 0.5f));
+        image.sprite = s_headIMG;
+    }
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("开始下载");
+            StartCoroutine(DownLoadImage());
+
+        }
+    }
+
+	Destory有延迟
+==================================================================================================================================================================
+Equals和==的比较
+
+ 一、值类型的比较
+
+  对于值类型来说  两者比较的都是”内容”是否相同，即 值 是否一样，很显然此时两者是划等号的。
+
+            int i = 9;
+            int j = 9;
+            Console.WriteLine("i==j"+(i==j)); //true
+            Console.WriteLine("i.Equals(j)"+(i.Equals(j)));  //true
+  二、引用类型的比较
+
+  对于引用类型来说，等号(==)比较的是两个变量的”引用” 是否一样，即是引用的”地址”是否相同。而对于equals来说仍然比较的是变量的  ”内容” 是否一样。
+
+  1、字符串的比较
+
+            string s1 = "abc";
+            string s2 = "abc";
+            Console.WriteLine("s1==s2"+(s1==s2));//true
+            Console.WriteLine("s1.Equals(s2)"+(s1.Equals(s2)));//true
+  string是微软封装的一个字符串类，在内部他已经对 = = 操作符进行了重写。重写后他比较的则是两个变量的内容是否相同，重写后的 = = 操作符内部调用的即是 equals 方法，所以输出的是true
+
+  2、 自定义的其他引用类型——一 person类为例
+
+            Person p1 = new Person("aa",18);
+            Person p2 = new Person("aa",18);
+            Console.WriteLine("p1==p2"+(p1==p2));//false
+            Console.WriteLine("p1.Equals(p2)"+p1.Equals(p2));//false
+  对于 p1==p2 比较的结果是false，这点是毫无疑问的，因为他俩是两个不同的变量，所以引用的地址也是不同的。但是对于p1.Equals(p2) 返回false，可能有人会产生疑问，p1 和p2的内容是相同的啊，为什么他俩的比较结果却是为false呢？。原因就在于在Equals是Object中的一个虚方法，而person类中没有对她进行重写，因此此时调用的仍是父类中的Equals方法。但是父类是无法知道你都有哪些成员字段的，因此返回的是false。要想让他能够比较两个变量的内容是否相同，那就应该重写Equals方法
+
+public override bool Equals(object obj)
+        {
+            Person p = (Person)obj;
+            return (this.Name == p.Name) && (this.Age == p.Age);
+        }
+  总结:Equals比较的永远是变量的内容是否相同，而= =比较的则是引用地址是否相同(前提:此种类型内部没有对Equals 或= = 进行重写操作，否则输出可能会有不同)。string 类型是个特例，因为他的内部对这两个都进行了重写。
+==================================================================================================================================================================
+
+AndroidJavaClass只能调用静态方法，获取静态属性
+AndroidJavaObject能调用公开方法和公开属性
+
+当做参数传默认值的时候
+default默认值表达式：生成类型的默认值。
+对于引用类型，将为 NULL；
+对于值类型，将为零；
+对于结构，将为 0 位模式
+default(Vector3)
+
+foreach读数据比for效率高   
+for先定义count比for里读.length  .count效率要高
+==================================================
+IEnumerator TestFunction() {
+        Debug.Log("TestFunction   before yield");
+        yield return new WaitForSeconds(1f);
+        Debug.Log("TestFunction   after   =======  yield");
+    }
+    IEnumerator Start()
+    {
+        while (!control) {
+            print("1111111111");
+            yield return new WaitForSeconds(5f);
+
+            yield return StartCoroutine(TestFunction());//阻塞当前，必须等待TestFunction 执行完毕才会继续输出下面的语句
+            如果上面这行没有yield return| TestFunction 遇到yield return 暂时退出回到start 执行面下语句输出2，当行数内的yield 等待时间到则回调TestFunction yield下面的语句
+            print("22222222222");
+        }
+        print("3333333");
+    }
+=====================================================
+convert 适合对ojbect类型转换
+（int）简单数据之间转换
+int.parse适合将string类型转换
+
+convert(null) 会返回0 不会抛异常
+int.parse 抛异常
+
+对于转换double为int
+conver 四舍五入取整
+int.parse报错
+(int) 不四舍五入取整
+=====================================================
+C# 延时函数
+        public static void Delays(int DelayTime = 100)
+        {
+            int time = Environment.TickCount;
+            while (true)
+            {
+                if (Environment.TickCount - time >= DelayTime)
+                {
+                    break;
+                }
+                Application.DoEvents();
+                Thread.Sleep(10);
+            }
+        }
+ 
+        public static void Delay1(int milliSecond)
+        {
+            int start = Environment.TickCount;
+            while (Math.Abs(Environment.TickCount - start) < milliSecond)
+            {
+                Application.DoEvents();
+            }
+        }
+ 
+        //延时程序 秒
+        public static bool Delay2(int delayTime)
+        {
+            DateTime now = DateTime.Now;
+            int s;
+            do
+            {
+                TimeSpan spand = DateTime.Now - now;
+                s = spand.Seconds;
+                Application.DoEvents();
+            }
+            while (s < delayTime);
+            return true;
+        }
+=====================================================
+运行会出现异常NullReferenceException：未将对象引用设置到对象的实例。
+
+在调用者代码中，我们需要创建一个American的实例对象american。由于发现实例还存在一个积累Person，所以运行时会首先调用基类的构造方法。在构造方法中Person调用了虚方法InitSkin。由于是虚方法，所以会在运行时调用子类的InitSkin方法。子类的InitSkin方法中，需要打印出名字。而这个时候，方法的调用堆栈还一直在基类的构造方法内，也就是在子类的构造方法中的代码还完全没有执行：
+static void Main()
+        {
+            American american = new American();
+            Console.ReadKey();
+        }
+
+        class Person
+        {
+            public Person()
+            {
+                InitSkin();
+            }
+
+            protected virtual void InitSkin()
+            {
+                //省略
+            }
+        }
+
+        class American : Person
+        {
+            Race Race;
+
+            public American()
+                : base()
+            {
+                Race = new Race() { Name = "White" };
+            }
+
+            protected override void InitSkin()
+            {
+                Console.WriteLine(Race.Name);
+            }
+        }
+
+        class Race
+        {
+            public string Name { get; set; }
+        }
+=====================================================
+time是从程序开始执行到现在的时间，
+deltaTime上一帧完成的时间，
+fixedTime表示FixedUpdate已经执行的时间，
+而fixedDeltatime是一个固定的时间增量。
+
+在update()中time、deltaTime获取的是一个正确的值，fixedTime的值并不会增加，
+如果是在FixedUpdate中，则fixedTime值会更新并且和time的值一样，deltaTime和fixedDeltatime的值一样。注意除了fixedDeltatime其他3个值都是只读的，可以通过fixedDeltatime来改变FixedUpdate的跟新速率。
+
+==========================================================================
+mysql安装
+
+cmake -DCMAKE_INSTALL_PREFIX=/home/mysql -DMYSQL_UNIX_ADDR=/home/mysql/mysql.sock -DMYSQL_DATADIR=/home/mysql/data/ -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DENABLE_DOWNLOADS=1 -DWITH_BOOST=/usr/local/boost
+
+make && make install
+
+mysql 5.7在初始化数据库的时候会产生一个！！！！！默认的随机密码！！！！！！！
+./mysqld --initialize  --user=mysql --basedir=/usr/local/mysql3307 --datadir=/usr/local/mysql3307/data
+==========================================================================
+MySQL5.7 添加用户、删除用户与授权
+mysql -uroot -proot
+
+MySQL5.7 mysql.user表没有password字段改 authentication_string；
+
+一. 创建用户:
+命令:CREATE USER 'username'@'host' IDENTIFIED BY 'password';
+
+例子: CREATE USER 'dog'@'localhost' IDENTIFIED BY '123456';
+
+        CREATE USER 'dog2'@'localhost' IDENTIFIED BY '';
+
+PS：username - 你将创建的用户名,
+
+host - 指定该用户在哪个主机上可以登陆，此处的"localhost"，是指该用户只能在本地登录，不能在另外一台机器上远程登录，如果想远程登录的话，将"localhost"改为"%"，表示在任何一台电脑上都可以登录;也可以指定某台机器可以远程登录;
+
+password - 该用户的登陆密码,密码可以为空,如果为空则该用户可以不需要密码登陆服务器。
+
+二.授权:
+命令:GRANT privileges ON databasename.tablename TO 'username'@'host'
+
+PS: privileges - 用户的操作权限,如SELECT , INSERT , UPDATE 等(详细列表见该文最后面).如果要授予所的权限则使用ALL.;databasename - 数据库名,tablename-表名,如果要授予该用户对所有数据库和表的相应操作权限则可用*表示, 如*.*.
+
+例子: GRANT SELECT, INSERT ON mq.* TO 'dog'@'localhost';
+
+三.创建用户同时授权
+mysql> grant all privileges on mq.* to test@localhost identified by '1234';
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.01 sec)
+
+PS:必须执行flush privileges; 
+
+否则登录时提示：ERROR 1045 (28000): Access denied for user 'user'@'localhost' (using password: YES ) 
+
+ 
+
+四.设置与更改用户密码
+命令:SET PASSWORD FOR 'username'@'host' = PASSWORD('newpassword');
+
+例子: SET PASSWORD FOR 'dog2'@'localhost' = PASSWORD("dog");
+
+五.撤销用户权限
+      命令: REVOKE privilege ON databasename.tablename FROM 'username'@'host';
+
+     说明: privilege, databasename, tablename - 同授权部分.
+
+      例子: REVOKE SELECT ON mq.* FROM 'dog2'@'localhost';
+
+PS: 假如你在给用户'dog'@'localhost''授权的时候是这样的(或类似的):GRANT SELECT ON test.user TO 'dog'@'localhost', 则在使用REVOKE SELECT ON *.* FROM 'dog'@'localhost';命令并不能撤销该用户对test数据库中user表的SELECT 操作.相反,如果授权使用的是GRANT SELECT ON *.* TO 'dog'@'localhost';则REVOKE SELECT ON test.user FROM 'dog'@'localhost';命令也不能撤销该用户对test数据库中user表的Select 权限.
+
+      具体信息可以用命令SHOW GRANTS FOR 'dog'@'localhost'; 查看.
+
+六.删除用户
+      命令: DROP USER 'username'@'host';
+
+七.查看用户的授权
+mysql> show grants for dog@localhost;
++---------------------------------------------+
+| Grants for dog@localhost |
++---------------------------------------------+
+| GRANT USAGE ON *.* TO 'dog'@'localhost' |
+| GRANT INSERT ON `mq`.* TO 'dog'@'localhost' |
++---------------------------------------------+
+2 rows in set (0.00 sec)
+
+PS:GRANT USAGE:mysql usage权限就是空权限，默认create user的权限，只能连库，啥也不能干
+==========================================================================
+                Unity3D各平台Application.xxxPath的路径
+2016年08月19日 19:25:42
+阅读数：31146
+前几天我们游戏在一个同事的Android手机上启动时无法正常进入，经查发现Application.temporaryCachePath和Application.persistentDataPath返回空字符串。便花时间认真研究了一下Unity3D的路径问题。我们常用的是以下四个路径：
+
+Application.dataPath 
+Application.streamingAssetsPath 
+Application.persistentDataPath 
+Application.temporaryCachePath 
+根据测试，详细情况如下：
+
+iOS:
+Application.dataPath            /var/containers/Bundle/Application/app sandbox/xxx.app/Data 
+Application.streamingAssetsPath /var/containers/Bundle/Application/app sandbox/test.app/Data/Raw 
+Application.temporaryCachePath /var/mobile/Containers/Data/Application/app sandbox/Library/Caches 
+Application.persistentDataPath  /var/mobile/Containers/Data/Application/app sandbox/Documents
+
+iOS和Mac OS X不同于Windows，app都是在一个沙盒空间中运行，每个app也有一个独立的数据存储空间，各app彼此不能互相访问、打扰。
+
+dataPath是app程序包安装路径，app本身就在这里，此目录是只读的。streamingAssetsPath是dataPath下的Raw目录。
+
+app的独立数据存储目录下有三个文件夹：Documents，Library和tmp。 
+Documents目录，这个目录用于存储需要长期保存的数据，比如我们的热更新内容就写在这里。需要注意的是，iCloud会自动备份此目录，如果此目录下写入的内容较多，审核的可能会被苹果拒掉。
+
+Library目录，这个目录下有两个子目录，Caches和Preferences。 
+    Caches是一个相对临时的目录，适合存放下载缓存的临时文件，空间不足时可能会被系统清除，Application.temporaryCachePath返回的就是此路径。我把热更新的临时文件写在这里，等一个版本的所有内容更新完全后，再把内容转移到Documents目录。 
+    Preferences用于应用存储偏好设置，用NSUserDefaults读取或设置。
+
+tmp目录，临时目录，存放应用运行时临时使用的数据。 
+需要注意的是，以上无论临时、缓存或者普通目录，如果不需要的数据，都请删除。不要占用用户的存储空间，像微信就是坏榜样。
+
+下面是各路径对应的OC访问方法 
+app安装路径: [[NSBundle mainBundle] resourcePath] 
+app数据沙盒存储根目录: NSHomeDirectory() 
+Documents: NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) 
+Library:     NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) 
+Caches:     NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) 
+tmp:        NSTemporaryDirectory()
+
+Android:
+Application.dataPath            /data/app/package name-1/base.apk 
+Application.streamingAssetsPath jar:file:///data/app/package name-1/base.apk!/assets 
+Application.temporaryCachePath /storage/emulated/0/Android/data/package name/cache 
+Application.persistentDataPath   /storage/emulated/0/Android/data/package name/files
+
+看Android上的路径，跟iOS有点类似，简单说一下。Android的几个目录是apk程序包、内存存储(InternalStorage)和外部存储(ExternalStorage)目录。
+
+apk程序包目录: apk的安装路径，/data/app/package name-n/base.apk，dataPath就是返回此目录。
+
+内部存储目录: /data/data/package name-n/，用户自己或其它app都不能访问该目录。打开会发现里面有4个目录（需要root） 
+    cache 缓存目录，类似于iOS的Cache目录 
+    databases 数据库文件目录 
+    files 类似于iOS的Documents目录 
+    shared_prefs 类似于iOS的Preferences目录，用于存放常用设置，比如Unity3D的PlayerPrefs就存放于此
+
+外部存储目录: 在内置或外插的sd上，用户或其它app都可以访问，外部存储目录又分私有和公有目录。 
+    公有目录是像DCIM、Music、Movies、Download这样系统创建的公共目录，当然你也可以像微信那样直接在sd卡根目录创建一个文件夹。好处嘛，就是卸载app数据依旧存在。
+
+    私有目录在/storage/emulated/n/Android/data/package name/，打开可以看到里面有两个文件夹cache和files。为什么跟内部存储目录重复了？这是为了更大的存储空间，以防内存存储空间较小。推荐把不需要隐私的、较大的数据存在这里，而需要隐私的或较小的数据存在内部存储空间。
+
+下面是各路径对应的Java访问方法： 
+apk包内: AssetManager.open(String filename) 
+内部存储: context.getFilesDir().getPath() or context.getCacheDir().getPath() 
+外部存储: context.getExternalFilesDir(null).getPath() or context.getExternalCacheDir().getPath()
+
+理解了Android存储的原理，最后来说说开头提到的bug，Application.temporaryCachePath/persistentDataPath返回空字符串。这其实因为权限的原因，app没有声明访问外部存储空间的权限，但是Application.temporaryCachePath/ ApplicationpersistentDataPath却想返回外部存储的路径。这是Unity3D的bug，没有权限本应该抛出一个异常或者错误，让开发者知道原因。
+
+经反复测试发现，有【外置SD卡】的设备上，如果声明读/写外部存储设备的权限，会返回外部存储路径，不声明则会返回内部存储路径，这样不会有问题。而在【无外置SD卡】的设备上，不管是否声明读/写外部存储设备的权限，Application.temporaryCachePath/persistentDataPath都返回外部存储路径，但是又没有权限，就可能会导致返回null了，之所以说可能是因为这个bug不是必现，如果出现了设备重启之后就好了，怀疑是linux设备mount问题。但是出了问题，我们不能跟用户说你重启一下手机就好了。
+
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+1
+Windows:
+Application.dataPath:            应用的appname_Data/ 
+Application.streamingAssetsPath: 应用的appname_Data/StreamingAssets 
+Application.temporaryCachePath: C:\Users\username\AppData\Local\Temp\company name\product name 
+Application.persistentDataPath:   C:\Users\username\AppData\LocalLow\company name\product name
+
+=======================================================================================================================
+HttpWebRequest获取文件header信息。可以拿到文件长度，但并不下载文件
+HttpWebRequest requet = HttpWebRequest.Create(url) as HttpWebRequest;
+requet.Method = "HEAD";
+HttpWebResponse response = requet.GetResponse() as HttpWebResponse;

@@ -1,0 +1,123 @@
+
+<!--
+	hex code（十六进制代码） 遵循 red-green-blue（红-绿-蓝）
+	数字 0 是十六进制代码中最低的数字，表示完全没有颜色。
+	数字 F 是十六进制代码中最高的数字，表示最大可能的亮度。	
+-->
+
+<!--链接外部字体 中间的是css格式-->
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+
+
+<!--style 中间的是css格式-->
+<style>
+#cat-photo-element {     //！！！！！    #使用-->ID属性<--设置标签样式
+  background-color: green;    
+}
+
+
+.red-text {
+	color: red;	//！！！！！    .使用-->class属性<--设置元素字体颜色
+}
+
+h2 {
+	font-family: Lobster, Monospace;	//设置h2标签元素字体
+}
+
+p {
+	font-size: 16px;		//设置p标签元素字体，字号
+	font-family: Monospace;
+}
+
+.thick-green-border { 		//.定义一个类 设置一个边框
+	border-color: green;	//颜色
+	border-width: 10px;		//宽度
+	border-style: solid;	//样式
+	border-radius: 50%;		//半径 百分比是一个圆环   px 只设置四个角为一个圆角
+}
+
+.smaller-image {		//.定义一个类 设置宽度
+	width: 100px;
+}
+</style>
+
+<!--h2一个标签 标识标题-->
+<h2 class="red-text">CatPhotoApp</h2>
+<!--超链接-->
+<!--href 属性的值替换为一个 # （# 也称为哈希符号），将其转换为一个固定链接，有链接效果显示，实际不做任何跳转-->
+<a href="https://www.w3cschool.cn">cat photos</a>
+
+
+<!--类可以多个连用 空格隔开-->
+<!--alt属性 图片无法显示时 显示的文字-->
+<img class="smaller-image thick-green-border" src="/statics/codecamp/images/relaxing-cat.jpg">
+
+<p class="red-text">在大家心目中，也许编程是一件非常困难的事情，其实也是一件非常有乐趣的事情，只要掌握好编程入门的方法，就能慢慢进入一个全新的创造世界。</p>
+<p class="red-text">可以学习的编程语言有很多，我们这个编程训练营里面有大量的编程实战实验，包括Html、css、Javascript、jquery、bootstrap等等前端编程实战课程，请大家耐心按阶段不断向前学习和通过一轮一轮的挑战，相信很快您的编程技术会得到很大的提升，为找到一份好的编程工作做好准备。</p>
+
+<!--项目符号无序列表-->
+<ul>
+    <li>111</li>		<!--	·.111	-->
+    <li>222</li>		<!--	·.222	-->
+    <li>333</li>		<!--	·.333	-->
+</ul>
+<!--项目符号有序列表-->
+<ol>
+	<li>111</li>		<!--	1.111	-->
+    <li>222</li>		<!--	2.222	-->			
+    <li>333</li>		<!--	3.333	-->			
+</ol>
+<!--input 输入元素-->
+<!--input required属性 提示带有此属性的输入必须有输入内容-->
+<!--input checked属性 单选 复选默认选中-->
+
+<input type="text"/>
+<!--input 单选按钮都要嵌套在自己的label中-->
+<label>
+    <input type="radio" name="indoor-outdoor"/>indoor
+</label>
+<label>
+    <input type="radio" name="indoor-outdoor"/>outdoor
+</label>
+<!--div 块级元素-->
+<!--
+	除了分别指定元素的 padding-top、padding-right、padding-bottom 和 padding-left
+	简称：（上右下左） padding: 10px 20px 10px 20px;
+-->
+<!--css样式覆盖-->
+<!--
+	注意：在 HTML元素中列出这些 class 的顺序并不重要。
+	然而，<style> 部分中的 class 声明的顺序是**重要**的，第二个声明将始终优先于第一个声明。因为 .blue-text 是第二个声明，它会覆盖 .pink-text 的属性
+	color:pink!important.则会显示pink
+
+	id属性始终是具有更高的优先级
+
+	内联样式 ex：<h1 style="color: white;">
+
+	Important覆盖所有其他样式  ex:color: pink !important;
+	=============================================================================================
+	!important覆盖所有其他样式内联 > id > class
+-->
+<style>
+body {
+background-color: black;
+font-family: Monospace;
+color: green;
+}
+#brown-text {    
+  color: brown;    
+}
+.pink-text {
+color: pink;
+}
+.blue-text {
+color: blue;
+}
+</style>
+<h1 class="pink-text blue-text">Hello World!</h1>  
+================================================================================================================================
+查找 HTML 元素
+
+通过 ID     找到 HTML 元素  document.getElementById("");
+通过 标签名 找到 HTML 元素  document.getElementsByTagName("");
+通过 类名   找到 HTML 元素  document.getElementsByClassName("");

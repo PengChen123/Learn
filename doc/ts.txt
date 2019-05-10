@@ -1,0 +1,174 @@
+					TypeScript
+============================================================================================
+var  :的作用域是函数作用域
+let  :词法作用域或块作用域
+const:有与 let相同的作用域规则，但是不能对它们重新赋值 --变量
+readonly 属性
+===========================================================================
+模版字符串，它可以定义多行文本和内嵌表达式。 这种字符串是被反引号包围（ `），并且以${ expr }这种形式嵌入表达式
+ex:
+①---------------------------------------------------
+let name: string = `Gene`;
+let age: number = 37;
+let sentence: string = `Hello, my name is ${ name }.
+
+I'll be ${ age + 1 } years old next month.`;
+②---------------------------------------------------
+let sentence: string = "Hello, my name is " + name + ".\n\n" +
+    "I'll be " + (age + 1) + " years old next month.";
+----------------------------------------------------
+效果相同
+
+//字符串字面量类型用来约束取值只能是某几个字符串中的一个
+type testStr = "aa"|"bb"|"cc"; 
+
+解构数组
+===========================================================================
+private _cmds:Array<string> = null;
+(this._cmds || (this._cmds = [])).length === 0 && this._cmds.push("111111111");
+
+1.先判断this._cmds || (this._cmds = [])
+2.判断this._cmds.length === 0 等于0 执行 this._cmds.push("111111111");
+
+===========================================================================
+访问数组未定义的下标或者对其进行赋值时，它的类型为已存在元素的类型组成的联合类型，能够调用的方法为联合类型共有的方法
+
+let input = [1, 2];
+let [first, second] = input;
+相当于赋值
+first = input[0];
+second = input[1];
+
+let [first, ...rest] = [1, 2, 3, 4];
+first  1
+rest是数组[2,3,4]
+
+let [, second, , fourth] = [1, 2, 3, 4];
+second=2  fourth=4
+===========================================================================
+联合类型
+var path :string[]|string;   
+
+    path  = '/temp/log.xml';
+
+    path = ['/temp/log.xml','/temp/error.xml'];
+
+联合类型参数当方法参数的时候
+有些类型的方法需要 用<type> 方式断言类型
+ex：function(value:string|number){
+	(<string>value).length  //需要断言类型为string ，bcos-number类型没有length方法
+}
+===========================================================================
+var q = 1;
+var p = 2;
+[q, p] = [p, q];  //解构赋值 相当于交换1各变量的值
+-----------------------------------------------------------------------------
+
+解构对象
+----------
+let o = {
+    a: "foo",
+    b: 12,
+    c: "bar"
+};
+let { a, b } = o;
+---------
+null表示"没有对象"，即该处不应该有值
+undefined表示"缺少值"，就是此处应该有一个值，但是还没有定义
+（1）变量被声明了，但没有赋值时，就等于undefined。
+	var i;
+	i // undefined
+（2) 调用函数时，应该提供的参数没有提供，该参数等于undefined。
+	function f(x){console.log(x)}
+	f() // undefined
+（3）对象没有赋值的属性，该属性的值为undefined。
+	var  o = new Object();
+	o.p // undefined
+（4）函数没有返回值时，默认返回undefined。
+	var x = f();
+	x // undefined
+===========================================================================
+接口 函数类型
+interface SearchFunc {
+  (source: string, subString？: string): boolean;  ？可选参数
+}
+函数类型三种写法
+let myAdd: (a: number, b: number) => void = function (a: number, b: number): void {  a + b; }
+转换js是  =>后面跟返回类型必须写
+var myAdd = function (a, b) { a + b; };
+
+let myAdd1 = function (a: number, b: number): number { return a + b; }
+let myAdd2 = (a: number, b: number) => { return a + b;}
+
+转换js是var myAdd2 = function (a, b) { return a + b; };
+
+
+索引类型
+class Animal{name:string;}
+class Dog extends Animal{breed:string;}
+interface NotOkay{
+	[x:number]:Dog;//数字索引的返回值必须是字符串索引返回值类型的子类型
+	[x:string]:Animal;
+}
+
+两种变量定义为方法的 形式
+let x = function(x){return x;}
+let y= argsY=>argsY+1;
+
+成员默认public
+
+get set 存取器  不带set的存取器 会被自动认为是readonly
+
+返回函数的this
+箭头函数能保存函数创建时的 this 值，而不是调用时的值（或者用    ｛函数.bind(this)｝的方式指定绑一下this ）
+
+重载函数 将最精确的上开最上
+
+
+class eat {
+            name: string = "111"; 
+            eat() { };
+        }
+        class drink { 
+            name: string = "2222"
+                        drink() { }; }
+
+        function abc<T, U>(first: T, second: U): T & U { 
+            let result = <T & U>{};
+            for (let id in first) {
+                (<any>result)[id] = (<any>first)[id];
+            }
+            for (let id in second) {
+                if (!result.hasOwnProperty(id)) {
+                    (<any>result)[id] = (<any>second)[id];
+                }
+            }
+            return result;
+        }
+
+        var jim = abc(new eat(), new drink());
+交叉类 将两个类合为一个新类型
+
+去除联合类型种的null
+let str： null| string；
+①if == null 
+②短路 str = str || “default”
+
+③ ！
+function fixed(name: string | null): string {
+  function postfix(epithet: string) {
+    return name!.charAt(0) + '.  the ' + epithet; // ok
+  }
+  name = name || "Bob";
+  return postfix("great");
+}
+
+
+索引类型
+function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {
+  return names.map(n => o[n]);
+}
+keyof T的结果为T上已知的公共属性名的联合
+interface Person {    name: string;    age: number;}   let personProps: keyof Person; // 'name' | 'age'
+extends限定类型 K extends keyof Person   K只能是person里的name age；  
+T[K]，索引访问操作符。 在这里，类型语法反映了表达式语法。 这意味着person['name']具有类型Person['name']

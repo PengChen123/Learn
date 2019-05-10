@@ -1,0 +1,8 @@
+willTrigger|hasEventListener 都是移除监听 will也是执行has
+touchEnabled需要手动true
+
+egret List
+itemRenderer渲染个体。。。类
+dataProvider  数据源eui.ArrayCollection（）
+
+数据源.source = any[]
