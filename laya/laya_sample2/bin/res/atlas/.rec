@@ -1,0 +1,109 @@
+D .
+D ani
+P 7B84E2AF girl_idle_01.png
+P 061C6EE1 girl_run_01.png
+P C35214D9 girl_run_02.png
+P D71EB477 girl_run_03.png
+P 7B84E2AF girl_run_04.png
+P B669FA17 girl_run_05.png
+P D0779C5A girl_run_06.png
+P 6FAC7ED3 girl_run_07.png
+P FCC6159F girl_run_08.png
+D bg
+R 39F0E9F3 loading.jpg
+D comp
+P D12221A9 bg.png
+P 9401CC40 blank.png
+P B03390E5 btn_close.png
+P 1F3929EA button.png
+P 6CC6DF97 checkbox.png
+P FB94CCF2 clip_num.png
+P F7B6B7D7 clip_selectBox.png
+P 755271AE clip_tree_arrow.png
+P 859FD34C clip_tree_folder.png
+P A0E3B8F9 combobox.png
+P 9EDA959E hscroll$bar.png
+P 1AB768D4 hscroll$down.png
+P 685261D3 hscroll$up.png
+P 274B8076 hscroll.png
+P E466EB1C hslider$bar.png
+P C4BECA54 hslider.png
+P 5EDC128C html.png
+P ACFFCCCF image.png
+P 5EDC128C label.png
+P 5EDC128C linkbutton.png
+P 9E4DD730 progress$bar.png
+P 3FD78E12 progress.png
+P BF898D6A radio.png
+P BF898D6A radiogroup.png
+P 8CFD9D35 tab.png
+P BDA71F88 textarea.png
+P BDA71F88 textinput.png
+P 52107B89 vscroll$bar.png
+P E26B933E vscroll$down.png
+P B9680947 vscroll$up.png
+P 7E990267 vscroll.png
+P E466EB1C vslider$bar.png
+P 2BFF7046 vslider.png
+D picture
+D sounds
+D xml
+R 3C009F80 guide.xml
+R 12194B46 item.xml
+R 205BAE67 notice.xml
+R EFD7D269 npc.xml
+R 0D0A543E roleInfo.xml
+D picture/mini
+P 0494CABD mini1.jpg
+P FBFAA72B mini2.jpg
+P E3B7D505 mini3.jpg
+P E3832D48 mini4.jpg
+P 07BC6E01 mini5.jpg
+P 0C7841DF mini6.jpg
+P E56C61DB mini7.jpg
+D picture/other
+R EBE10BFB bar.png
+D picture/presentation
+P FDA688C8 presentation1.jpg
+P 129FCFAF presentation2.jpg
+P 9220E397 presentation3.jpg
+P 22E04033 presentation4.jpg
+P DFE13ADD presentation5.jpg
+P C7A4FB47 presentation6.jpg
+P AB886062 presentation7.jpg
+D picture/super
+P 60B0C485 super1.jpg
+P C9525C86 super2.jpg
+P 61F28A16 super3.jpg
+P 1017BFDC super4.jpg
+P 4CD8A871 super5.jpg
+P AA99962C super6.jpg
+P D52C949E super7.jpg
+R E247096C supergp.jpg
+D picture/ui
+R 5338E6AE awards.png
+P C46BBF34 back.png
+R 9B76A7A6 back1.png
+P 5989FAE7 button3.png
+P 34AF97F2 csj.jpg
+R C5080312 hulu.png
+R 58111D43 hulu_lie.png
+P A1B14EFA lianhua.png
+P 1DFD371C lyy.jpg
+P CA140EB7 system.png
+P FC659B82 topmini.png
+P 2B52F786 ui_anniu.png
+R 103B06D6 ui_dengludi.png
+P 8FBAC1D3 ui_fanhui_1.png
+P DC0DB0CE ui_guan.png
+P 9A404209 ui_guanbi.png
+P 1BFDA6C2 ui_icondi.png
+P 9DA601CF ui_jiab.png
+P F200E2D1 ui_kai.png
+P 41AD8DE6 ui_meishuzidi.png
+P 615C590D ui_paihangdi.png
+P 53584419 ui_shezhi.png
+P 1DD9D2C8 ui_wen.png
+P 7FCD753B ui_zuanshi.png
+D sounds/bg
+R 93C4B501 bgm.WAV

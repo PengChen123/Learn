@@ -1,0 +1,22 @@
+<res>
+   <item name="picture/mini/mini2.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/mini" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/presentation" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/super" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/mini/mini3.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/mini/mini4.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/mini/mini5.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/mini/mini6.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/mini/mini7.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/super/super1.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/super/super2.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/super/super3.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/super/super4.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/super/super5.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/super/super6.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/super/super7.jpg" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/other/leftButton.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/other/rightButton.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="picture/other/backButton.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="bg/loading.jpg" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+</res>

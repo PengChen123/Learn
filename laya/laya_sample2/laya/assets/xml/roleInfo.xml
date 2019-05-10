@@ -1,0 +1,52 @@
+<root>
+	<record id="1" name="我叫大娃" trait="鲁莽" intro="力大无穷，巨大化">
+		<pictures>
+			<pic>picture/presentation/presentation1.jpg</pic>
+			<pic>picture/mini/mini1.jpg</pic>
+			<pic>picture/super/super1.jpg</pic>
+		</pictures>
+	</record>
+	<record id="2" name="我叫二娃" trait="弱小" intro="千里眼，顺风耳，灵活聪明，机敏过人，最善于谋划计策">
+		<pictures>
+			<pic>picture/presentation/presentation2.jpg</pic>
+			<pic>picture/mini/mini2.jpg</pic>
+			<pic>picture/super/super2.jpg</pic>
+		</pictures>
+	</record>
+	<record id="3" name="我叫三娃" trait="怕打屁股 | 性急骄傲" intro="铜头铁臂，钢筋铁骨，刀枪不入">
+		<pictures>
+			<pic>picture/presentation/presentation3.jpg</pic>
+			<pic>picture/mini/mini3.jpg</pic>
+			<pic>picture/super/super3.jpg</pic>
+		</pictures>
+	</record>
+	<record id="4" name="我叫四娃" trait="怕冷" intro="喷火，吸火，霹雳">
+		<pictures>
+			<pic>picture/presentation/presentation4.jpg</pic>
+			<pic>picture/mini/mini4.jpg</pic>
+			<pic>picture/super/super4.jpg</pic>
+		</pictures>
+	</record>
+	<record id="5" name="我叫五娃" trait="意气用事" intro="吸水，吐水，口吐闪电产生降雨">
+		<pictures>
+			<pic>picture/presentation/presentation5.jpg</pic>
+			<pic>picture/mini/mini5.jpg</pic>
+			<pic>picture/super/super5.jpg</pic>
+		</pictures>
+	</record>
+
+	<record id="6" "我叫六娃" trait="太顽皮" intro="隐身术，透体术，来无影去无踪，聪明机灵，最善于偷盗和行动">
+		<pictures>
+			<pic>picture/presentation/presentation6.jpg</pic>
+			<pic>picture/mini/mini6.jpg</pic>
+			<pic>picture/super/super6.jpg</pic>
+		</pictures>
+	</record>
+	<record id="7" name="我叫七娃" trait="怕失去宝葫芦" intro="倍受哥哥们的关爱，有宝葫芦，可以吸入魔法、兵器和妖怪">
+		<pictures>
+			<pic>picture/presentation/presentation7.jpg</pic>
+			<pic>picture/mini/mini7.jpg</pic>
+			<pic>picture/super/super7.jpg</pic>
+		</pictures>
+	</record>
+</root>

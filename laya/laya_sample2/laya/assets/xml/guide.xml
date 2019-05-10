@@ -1,0 +1,10 @@
+<root>
+	<record id="1" nextId="2" npcId="1" say="来到葫芦山采药，轰隆的巨响，刮起了一阵黑风。"></record>
+	<record id="2" nextId="3" npcId="1" say="懵逼的坐在地上好一阵，看着已经裂开的葫芦山。神马鬼？"></record>
+	<record id="3" nextId="4" npcId="2" say="完犊子，玩大了。把葫芦山钻穿了。"></record>
+	<record id="4" nextId="5" npcId="1" say="穿山甲，这到底是发生了什么？"></record>
+	<record id="5" nextId="6" npcId="2" say="老爷爷您好，刚才我不小心在山中穿梭这玩，不小心把葫芦山给钻穿了。放跑了被神山镇压的妖精？"></record>
+	<record id="6" nextId="7" npcId="2" say="这两个妖精，牛逼的恨。这下麻烦大了！！！"></record>
+	<record id="7" nextId="8" npcId="1" say="这可如何是好，不能采药我得饿死。"></record>
+	<record id="8" nextId="-1" npcId="1" say="木的问题，神山中有可以消灭妖精的宝物。咱们一起去一探究竟。。。"></record>	
+</root>

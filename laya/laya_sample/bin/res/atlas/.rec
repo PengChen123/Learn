@@ -1,0 +1,88 @@
+D .
+D apes
+P 7105AB31 monkey0.png
+P B919DA90 monkey1.png
+P 40CFAF5A monkey2.png
+P 030540DA monkey3.png
+D bg
+R 2B60A14B 1.jpg
+R 6C655E15 background.jpg
+D comp
+P D12221A9 bg.png
+P 9401CC40 blank.png
+P B03390E5 btn_close.png
+P 1F3929EA button.png
+P 6CC6DF97 checkbox.png
+P FB94CCF2 clip_num.png
+P F7B6B7D7 clip_selectBox.png
+P 755271AE clip_tree_arrow.png
+P 859FD34C clip_tree_folder.png
+P A0E3B8F9 combobox.png
+P 9EDA959E hscroll$bar.png
+P 1AB768D4 hscroll$down.png
+P 685261D3 hscroll$up.png
+P 274B8076 hscroll.png
+P E466EB1C hslider$bar.png
+P C4BECA54 hslider.png
+P 5EDC128C html.png
+P ACFFCCCF image.png
+P 5EDC128C label.png
+P 5EDC128C linkbutton.png
+P 9E4DD730 progress$bar.png
+P 3FD78E12 progress.png
+P BF898D6A radio.png
+P BF898D6A radiogroup.png
+P 8CFD9D35 tab.png
+P BDA71F88 textarea.png
+P BDA71F88 textinput.png
+P 52107B89 vscroll$bar.png
+P E26B933E vscroll$down.png
+P B9680947 vscroll$up.png
+P 7E990267 vscroll.png
+P E466EB1C vslider$bar.png
+P 2BFF7046 vslider.png
+D player
+D player/boy
+P DDBF15F2 attack_01.png
+P CA1B644F boy_idle_01.png
+P 7CA464DF boy_run_01.png
+P DDBF15F2 boy_run_02.png
+P A70826D9 boy_run_03.png
+P CA1B644F boy_run_04.png
+P 0CCC7219 boy_run_05.png
+P 0967D494 boy_run_06.png
+P FC1AAF11 boy_run_07.png
+P 343036C4 boy_run_08.png
+D player/girl
+P D71EB477 attack_01.png
+P 7B84E2AF girl_idle_01.png
+P 061C6EE1 girl_run_01.png
+P C35214D9 girl_run_02.png
+P D71EB477 girl_run_03.png
+P 7B84E2AF girl_run_04.png
+P B669FA17 girl_run_05.png
+P D0779C5A girl_run_06.png
+P 6FAC7ED3 girl_run_07.png
+P FCC6159F girl_run_08.png
+D player/wyd
+P F386C6A9 attack_01.png
+P A5A1A4CE wyd_idle_01.png
+P 979DC9E6 wyd_run_01.png
+P F386C6A9 wyd_run_02.png
+P 253A743A wyd_run_03.png
+P 047678DB wyd_run_04.png
+P 3459147B wyd_run_05.png
+P 787B768A wyd_run_06.png
+P 17DCDFE4 wyd_run_07.png
+P A5A1A4CE wyd_run_08.png
+D player/yd
+P 57EF78E9 attack_01.png
+P FE895897 yd_idle_01.png
+P C17A064B yd_run_01.png
+P 57EF78E9 yd_run_02.png
+P 423699BE yd_run_03.png
+P 209D9E59 yd_run_04.png
+P AE4FD83F yd_run_05.png
+P 1054A078 yd_run_06.png
+P 3ACB9A14 yd_run_07.png
+P FE895897 yd_run_08.png
