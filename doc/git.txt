@@ -20,4 +20,6 @@ git branch   //查看分支
 git branch  name  //创建分支
 git checkout name  //切换分支
 
-git remote add '短名称' http://....
+git remote add '别名' https://github.com/PengChen123/Learn.git
+
+git push '别名'
