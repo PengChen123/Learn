@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<platforms>
+  
+    <platform id="8090" url="http://www.8090.com/tq">
+        <uId>txtUsername</uId>
+        <pId>txtPassword</pId>
+        <subId>logBtn</subId>
+    </platform>
+  
+</platforms>
