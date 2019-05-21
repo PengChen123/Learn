@@ -149,3 +149,170 @@ $("button") 选择所有 button
 $(".well")  选择所有带well的 class
 
 addClass()方法给元素加class
+
+js发送post
+function postCoversion(URL, PARAMS){
+			var tmpiframe = document.createElement("iframe");
+			tmpiframe.name = "frame1";
+			tmpiframe.style="display:none";
+			document.body.appendChild(tmpiframe);
+
+		    var temp = document.createElement("form");
+			temp.style.visibility="hidden"
+		    temp.action = URL;
+		    temp.method = "post";
+			temp.onsubmit = "return false";
+			temp.target = "frame1";
+		    for (var x in PARAMS)
+		    {
+		        var opt = document.createElement("textarea");
+		        opt.name = x;
+		        opt.value = PARAMS[x];
+		        temp.appendChild(opt);
+		    }
+		    document.body.appendChild(temp);
+		    temp.submit();
+			// document.body.removeChild(temp);
+			// document.body.removeChild(tmpiframe);
+		} 
+
+var body ={"target":{
+					"server_id":"1",
+					"status":"server",
+					"role_id":""
+				},"cmd":{
+					"time":new Date().getTime(),
+					"serverid":loginData.sid,
+					"userid":loginData.uid,
+					"crltype":crltype,
+					"pf":loginData.pf,
+					"net":loginData.wanclient == "mini" ? "exe":"ie",
+					"browser":getBrowser(),
+					"os":getOS()
+				},"track":{
+					"oper":"100",
+					"ts":"1411454706"
+				}
+	}
+body 数据转json格式
+	function getStr(crltype){
+			var data = setBody(crltype);
+			var str = "";
+			var first = true;
+			for (var key in data){
+				if(first){
+					str+="{\""+key+"\":{";
+					first=false;
+				}else{
+					str+=",\""+key+"\":{";
+				}
+				var value= data[key];
+				for(var valueKey in value){
+					str+="\""+valueKey+"\":\""+value[valueKey]+"\",";
+				}
+				str = str.substring(0, str.lastIndexOf(','));
+				str+="}";
+			}
+			str+="}";
+			return str;
+		}
+
+function getOS() {  //判断所处操作系统
+			var sUserAgent = navigator.userAgent.toLowerCase();  
+			var isWin = (navigator.platform == "Win32") || (navigator.platform == "Win64")|| (navigator.platform == "wow64");   
+			var isMac = (navigator.platform == "Mac68K") || (navigator.platform == "MacPPC") || (navigator.platform == "Macintosh") || (navigator.platform == "MacIntel");   
+			if (isMac) return "OS X";   
+			var isUnix = (navigator.platform == "X11") && !isWin && !isMac;   
+			if (isUnix) return "Unix";   
+			var isLinux = (String(navigator.platform).indexOf("Linux") > -1);   
+			var bIsAndroid = sUserAgent.match(/android/i) == "android";  
+			if (isLinux) {  
+				if(bIsAndroid) return "Android";  
+				else return "Linux";   
+			}  
+			if (isWin) {   
+				var isWin2K = sUserAgent.indexOf("windows nt 5.0") > -1 || sUserAgent.indexOf("windows 2000") > -1;   
+				if (isWin2K) return "Windows 2000";   
+				var isWinXP = sUserAgent.indexOf("windows nt 5.1") > -1 || sUserAgent.indexOf("windows xp") > -1;
+				if (isWinXP) return "Windows XP";   
+				var isWin2003 = sUserAgent.indexOf("windows nt 5.2") > -1 || sUserAgent.indexOf("windows 2003") > -1;   
+				if (isWin2003) return "Windows 2003";   
+				var isWinVista= sUserAgent.indexOf("windows nt 6.0") > -1 || sUserAgent.indexOf("windows vista") > -1;   
+				if (isWinVista) return "Windows Vista";   
+				var isWin7 = sUserAgent.indexOf("windows nt 6.1") > -1 || sUserAgent.indexOf("windows 7") > -1;   
+				if (isWin7) return "Windows 7";   
+				var isWin8 = sUserAgent.indexOf("windows nt 6.2") > -1 || sUserAgent.indexOf("windows 8") > -1;  
+				if (isWin8) return "Windows 8"; 
+				var isWin10 = sUserAgent.indexOf("windows nt 10.0")>-1||sUserAgent.indexOf("windows 10")>-1;	
+				if(isWin10)return "Windows 10";				
+			}  
+			return "Unknown";
+		}
+		function getBrowser(){
+			var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+			var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+			var isIE = userAgent.indexOf("compatible") > -1
+					&& userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+			var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+			var isSafari = userAgent.indexOf("Safari") > -1
+					&& userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
+			var isChrome = userAgent.indexOf("Chrome") > -1
+					&& userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
+			if (isFF) {
+				return "Firefox";
+			}
+			if (isSafari) {
+				return "Safari";
+			}
+			if (isChrome) {
+				return "Chrome";
+			}
+			if (isIE) {
+				var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+				var result = reIE.test(userAgent);
+				if(result){
+					var fIEVersion = parseFloat(RegExp["$1"]);
+					if (fIEVersion == 7) {
+						return "IE 7.0";
+					} else if (fIEVersion == 8) {
+						return "IE 8.0";
+					} else if (fIEVersion == 9) {
+						return "IE 9.0";
+					} else if (fIEVersion == 10) {
+						return "IE 10.0";
+					}
+				}
+			}else{
+				 var result = /Trident\/7.0/i.test(userAgent);
+				 if(result){
+					var str = userAgent.match(/rv:([0-9]+\.[0-9]+)/i);
+					if(str!=null){
+						str = (""+str).split(':')[1].split(".")[0];
+						if(str == "11")
+							return "IE 11.0";
+					}
+				 }
+			}
+			return "Unknown";
+		}
+		function setCookie(key){
+			var oDate=new Date();
+			oDate.setTime(oDate.getTime()+60*60*24*1000*365);
+			var expires = "expires="+oDate.toUTCString();
+			document.cookie = loginData.sid + key + "=" + "1" + "; " + expires;
+		}
+		function isFindKey(key){
+			key = "" + loginData.sid + key;
+			var num = getCookie(key);
+			if(num==key)return true;
+			return false;
+		}
+		function getCookie(key){
+			var attr1=document.cookie.split('; ');//空格不能取消
+			for(var i=0;i<attr1.length;i++){
+				var attr2=attr1[i].split('=');
+				if(attr2[0]==key){
+					return key;
+				}
+			}
+		}

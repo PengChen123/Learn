@@ -15,7 +15,7 @@ namespace CefSharpBrowser.script.md5 {
         /// </summary>
         /// <param name="IsCaseSensitive">是否区分大小写</param>
         /// <param name="IsReturnNum">是否返回为加密后字符的Byte代码</param>
-        public Md5Util(bool IsCaseSensitive, bool IsReturnNum) {
+        public Md5Util(bool IsCaseSensitive = true , bool IsReturnNum = false) {
             this.isReturnNum = IsReturnNum;
             this.isCaseSensitive = IsCaseSensitive;
         }

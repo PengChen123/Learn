@@ -10,6 +10,7 @@ namespace CefSharpBrowser {
             this.LifeSpanHandler = new CefLifeSpanHandler();
             this.KeyboardHandler = new CefKeyboardHandler();
             this.DownloadHandler = new CefDownloadHandler();
+            
 
         }
 
@@ -32,6 +33,7 @@ namespace CefSharpBrowser {
         public string Url { get; set; }
 
         public NewWindowEventArgs(IWindowInfo windowInfo, string url) {
+
             _windowInfo = windowInfo;
             this.Url = url;
         }

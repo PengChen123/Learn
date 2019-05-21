@@ -1,6 +1,8 @@
 ﻿using System;
 using CefSharp;
 
+
+
 namespace CefSharpBrowser.script {
     public class CefLifeSpanHandler : CefSharp.ILifeSpanHandler {
         public CefLifeSpanHandler() {
@@ -21,13 +23,27 @@ namespace CefSharpBrowser.script {
             //
         }
 
-        public bool OnBeforePopup(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, string targetUrl, string targetFrameName,
-            WindowOpenDisposition targetDisposition, bool userGesture, IPopupFeatures popupFeatures, IWindowInfo windowInfo,
-            IBrowserSettings browserSettings, ref bool noJavascriptAccess, out IWebBrowser newBrowser) {
+        //public bool OnBeforePopup(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, string targetUrl, string targetFrameName,
+        //    WindowOpenDisposition targetDisposition, bool userGesture, IPopupFeatures popupFeatures, IWindowInfo windowInfo,
+        //    IBrowserSettings browserSettings, ref bool noJavascriptAccess, out IWebBrowser newBrowser) {
 
-            Console.WriteLine("OnBeforePopup");
-            ExtChromiumBrowser webBrowser = chromiumWebBrowser as ExtChromiumBrowser;
+            //ExtChromiumBrowser webBrowser = chromiumWebBrowser as ExtChromiumBrowser;
             
+
+            //Action action = new Action(() => {
+            //    if (webBrowser.FindForm() is BrowserForm owner) {
+            //        NewWindowEventArgs e = new NewWindowEventArgs(windowInfo, targetUrl);
+            //        webBrowser.OnNewWindow(e);
+            //    }
+            //});
+            //webBrowser.Invoke(action);
+            //newBrowser = null;
+            //return true;
+        //}
+
+        public bool OnBeforePopup(IWebBrowser browserControl, IBrowser browser, IFrame frame, string targetUrl, string targetFrameName, WindowOpenDisposition targetDisposition, bool userGesture, IWindowInfo windowInfo, ref bool noJavascriptAccess, out IWebBrowser newBrowser) {
+            ExtChromiumBrowser webBrowser = browserControl as ExtChromiumBrowser;
+
 
             Action action = new Action(() => {
                 if (webBrowser.FindForm() is BrowserForm owner) {
@@ -38,6 +54,6 @@ namespace CefSharpBrowser.script {
             webBrowser.Invoke(action);
             newBrowser = null;
             return true;
-        }
+    }
     }
 }

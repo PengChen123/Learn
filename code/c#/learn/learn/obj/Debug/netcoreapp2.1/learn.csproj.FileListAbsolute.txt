@@ -9,3 +9,14 @@ C:\Users\Administrator\Desktop\c#code\learn\learn\obj\Debug\netcoreapp2.1\learn.
 C:\Users\Administrator\Desktop\c#code\learn\learn\obj\Debug\netcoreapp2.1\learn.AssemblyInfo.cs
 C:\Users\Administrator\Desktop\c#code\learn\learn\obj\Debug\netcoreapp2.1\learn.dll
 C:\Users\Administrator\Desktop\c#code\learn\learn\obj\Debug\netcoreapp2.1\learn.pdb
+D:\chenpengGit\code\c#\learn\learn\bin\Debug\netcoreapp2.1\learn.deps.json
+D:\chenpengGit\code\c#\learn\learn\bin\Debug\netcoreapp2.1\learn.runtimeconfig.json
+D:\chenpengGit\code\c#\learn\learn\bin\Debug\netcoreapp2.1\learn.runtimeconfig.dev.json
+D:\chenpengGit\code\c#\learn\learn\bin\Debug\netcoreapp2.1\learn.dll
+D:\chenpengGit\code\c#\learn\learn\bin\Debug\netcoreapp2.1\learn.pdb
+D:\chenpengGit\code\c#\learn\learn\obj\Debug\netcoreapp2.1\learn.csprojAssemblyReference.cache
+D:\chenpengGit\code\c#\learn\learn\obj\Debug\netcoreapp2.1\learn.csproj.CoreCompileInputs.cache
+D:\chenpengGit\code\c#\learn\learn\obj\Debug\netcoreapp2.1\learn.AssemblyInfoInputs.cache
+D:\chenpengGit\code\c#\learn\learn\obj\Debug\netcoreapp2.1\learn.AssemblyInfo.cs
+D:\chenpengGit\code\c#\learn\learn\obj\Debug\netcoreapp2.1\learn.dll
+D:\chenpengGit\code\c#\learn\learn\obj\Debug\netcoreapp2.1\learn.pdb
